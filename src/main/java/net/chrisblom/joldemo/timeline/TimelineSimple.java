@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public record TimelineIdiomatic(Instant createdAt, List<Window> windows) implements Timeline {
+public record TimelineSimple(Instant createdAt, List<Window> windows) implements Timeline {
 
     public record Window(Instant start, Instant end, int value) {
     }

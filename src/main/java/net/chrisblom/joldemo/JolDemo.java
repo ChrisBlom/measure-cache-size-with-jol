@@ -3,7 +3,7 @@ package net.chrisblom.joldemo;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 import net.chrisblom.joldemo.timeline.Timeline;
-import net.chrisblom.joldemo.timeline.TimelineIdiomatic;
+import net.chrisblom.joldemo.timeline.TimelineSimple;
 import net.chrisblom.joldemo.timeline.TimelinePrimitive;
 import net.chrisblom.joldemo.timeline.TimelinePrimitiveArrays;
 import org.openjdk.jol.info.GraphLayout;
@@ -30,17 +30,17 @@ public class JolDemo {
             .build(key -> TimelinePrimitiveArrays.fromTimeLine(JolDemo.randomTimeline(key)));
 
 
-    static TimelineIdiomatic randomTimeline(int seed) {
+    static TimelineSimple randomTimeline(int seed) {
         Random random = new Random(seed);
         int size = random.nextInt(10, 30);
 
-        List<TimelineIdiomatic.Window> windows = new ArrayList<>();
+        List<TimelineSimple.Window> windows = new ArrayList<>();
         long start = 0;
         for (int i = 0; i < size; i++) {
             long windowLengthMillis = random.nextLong(1000L * 60L);
             long end = start + windowLengthMillis;
             var value = random.nextInt(0, 1000);
-            windows.add(new TimelineIdiomatic.Window(
+            windows.add(new TimelineSimple.Window(
                     Instant.ofEpochMilli(start),
                     Instant.ofEpochMilli(end),
                     value
@@ -48,7 +48,7 @@ public class JolDemo {
             start = end;
         }
         var createdAt = Instant.ofEpochMilli(random.nextLong(0, 10000));
-        return new TimelineIdiomatic(createdAt, windows);
+        return new TimelineSimple(createdAt, windows);
     }
 
 

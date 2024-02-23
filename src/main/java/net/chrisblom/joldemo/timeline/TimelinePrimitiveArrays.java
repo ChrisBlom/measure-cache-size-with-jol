@@ -19,7 +19,7 @@ public record TimelinePrimitiveArrays(long[] windowsStart, long[] windowsEnd,
         return Optional.empty();
     }
 
-    public static TimelinePrimitiveArrays fromTimeLine(TimelineIdiomatic timeline) {
+    public static TimelinePrimitiveArrays fromTimeLine(TimelineSimple timeline) {
         var starts = timeline.windows().stream().mapToLong(x -> x.start().toEpochMilli()).toArray();
         var ends = timeline.windows().stream().mapToLong(x -> x.end().toEpochMilli()).toArray();
         var values = timeline.windows().stream().mapToInt(x -> x.value()).toArray();

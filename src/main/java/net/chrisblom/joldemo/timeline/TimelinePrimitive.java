@@ -21,7 +21,7 @@ public record TimelinePrimitive(List<WindowPrimitive> windows) implements Timeli
         return Optional.empty();
     }
 
-    public static TimelinePrimitive fromTimeLine(TimelineIdiomatic timeline) {
+    public static TimelinePrimitive fromTimeLine(TimelineSimple timeline) {
         return new TimelinePrimitive(timeline.windows()
                 .stream()
                 .map(x -> new WindowPrimitive(x.start().toEpochMilli(), x.end().toEpochMilli(), x.value())).toList());
